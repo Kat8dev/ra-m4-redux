@@ -8,20 +8,30 @@ import { FlexBox, Grid } from '../../styles'
 
 const HousesStyled = styled(FlexBox)``
 
+const filterType = (house, type) => {
+  return type.includes(house.type)
+}
+
+const filterCity = (house, city) => {
+  return city.includes(house.city)
+}
+
+const fiterCasas = (house, city, type) =>
+    filterType(house, type) && filterCity(house, city)
+
 function Houses() {
   const houses = useSelector((state) => state.houses.houses)
   const reqStatus = useSelector((state) => state.houses.reqStatus)
   const dispatch = useDispatch()
   const { allIds, byId, byType, byCities } = houses
   const { isError, isSucces, isLoading } = reqStatus
-  const [currentState, setCurrentState] = useState(allIds)
   const [perPage, setPerPage] = useState(9)
 
   useEffect(() => {
     dispatch(getHouses())
   }, [dispatch])
 
-  useEffect(() => {
+  /* useEffect(() => {
     const actualState = () => {
       const auxArray = []
       // Esto de aquí es un error grave
@@ -66,7 +76,7 @@ function Houses() {
       setCurrentState(getCurrentIds)
     }
     actualState()
-  }, [byId, byType, byCities])
+  }, [byId, byType, byCities])  */
 
   return (
     <HousesStyled>
@@ -74,7 +84,7 @@ function Houses() {
         {isLoading && <div>Loading...</div>}
         {isError && <div>Error</div>}
         {isSucces &&
-          currentState
+          allIds.filter(id => fiterCasas(byId[id], byCities, byType))
             .slice(0, perPage)
             .map((id) => (
               <HouseCard

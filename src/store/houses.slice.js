@@ -21,9 +21,9 @@ const initialState = {
   houses: {
     byId: {},
     allIds: [],
-    byType: {},
+    byType: [],
     allTypes: [],
-    byCities: {},
+    byCities: [],
     allCities: [],
   },
 }
@@ -33,23 +33,23 @@ const housesSlice = createSlice({
   initialState,
   reducers: {
     filterByTypes(state, action) {
-      state.houses.byType = { 1: action.payload }
+      state.houses.byType = [ action.payload ]
     },
     filterByCities(state, action) {
-      state.houses.byCities = { 1: action.payload }
+      state.houses.byCities = [ action.payload ]
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getHouses.pending, (state) => {
-      state.reqStatus.isError = true
+      state.reqStatus.isLoading = true
     })
     builder.addCase(getHouses.fulfilled, (state, action) => {
-      state.reqStatus.isError = false
+      state.reqStatus.isLoading = false
       state.reqStatus.isSucces = true
       action.payload.forEach((house) => {
         state.houses.byId[house.id] = house
-        state.houses.byType[house.id] = house.type
-        state.houses.byCities[house.id] = house.city
+        state.houses.byType[house.id -1] = house.type
+        state.houses.byCities[house.id -1] = house.city
 
         if (!state.houses.allIds.includes(house.id)) {
           state.houses.allIds.push(house.id)
