@@ -50,13 +50,3 @@ function MainMenu() {
 
 export default styled(MainMenu)``
 
-/*
- style={
-              label === 'Datos'
-                ? ({ isActive }) => ({
-                    color: isActive ? `${colors.font.headings}` : `${colors.font.headings}`,
-                    fontWeight: isActive ? '900' : '400',
-                  })
-                : null
-            }
-*/

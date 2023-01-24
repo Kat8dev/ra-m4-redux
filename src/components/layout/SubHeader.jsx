@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import {
   getHouses,
-  filterByTypes,
-  filterByCities,
+  setType,
+  setCity,
 } from '../../store/houses.slice'
 import { colors, Container, dimensions, FlexBox } from '../../styles'
 import { Button, Icon } from '../atoms'
@@ -51,8 +51,7 @@ function SubHeader({ ...props }) {
             defaultText="Piso, chalet o garaje..."
             hideLabel
             options={allTypes.map((type) => ({ value: type, text: type }))}
-            // Llamarlo setType, no filterByTypes, además solo envias un valor.
-            onChange={(e) => dispatch(filterByTypes(e.target.value))}
+            onChange={(e) => dispatch(setType(e.target.value))}
           />
 
           <SelectGroup
@@ -61,7 +60,7 @@ function SubHeader({ ...props }) {
             defaultText="Madrid, Barcelona o Zaragoza..."
             hideLabel
             options={allCities.map((city) => ({ value: city, text: city }))}
-            onChange={(e) => dispatch(filterByCities(e.target.value))}
+            onChange={(e) => dispatch(setCity(e.target.value))}
           />
 
           <Button>
