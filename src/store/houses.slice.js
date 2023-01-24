@@ -32,11 +32,12 @@ const housesSlice = createSlice({
   name: 'houses',
   initialState,
   reducers: {
+    // Llamarlo setType y guardarlo como un string, no es un array lo que envias en el subHeader
     filterByTypes(state, action) {
-      state.houses.byType = [ action.payload ]
+      state.houses.byType = [action.payload]
     },
     filterByCities(state, action) {
-      state.houses.byCities = [ action.payload ]
+      state.houses.byCities = [action.payload]
     },
   },
   extraReducers: (builder) => {
@@ -48,8 +49,8 @@ const housesSlice = createSlice({
       state.reqStatus.isSucces = true
       action.payload.forEach((house) => {
         state.houses.byId[house.id] = house
-        state.houses.byType[house.id -1] = house.type
-        state.houses.byCities[house.id -1] = house.city
+        state.houses.byType[house.id - 1] = house.type // No tiene sentido el -1
+        state.houses.byCities[house.id - 1] = house.city // No tiene sentido el -1
 
         if (!state.houses.allIds.includes(house.id)) {
           state.houses.allIds.push(house.id)

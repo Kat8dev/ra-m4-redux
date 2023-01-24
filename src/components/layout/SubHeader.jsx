@@ -1,7 +1,11 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { getHouses, filterByTypes, filterByCities } from '../../store/houses.slice'
+import {
+  getHouses,
+  filterByTypes,
+  filterByCities,
+} from '../../store/houses.slice'
 import { colors, Container, dimensions, FlexBox } from '../../styles'
 import { Button, Icon } from '../atoms'
 import { SelectGroup } from '../molecules'
@@ -47,6 +51,7 @@ function SubHeader({ ...props }) {
             defaultText="Piso, chalet o garaje..."
             hideLabel
             options={allTypes.map((type) => ({ value: type, text: type }))}
+            // Llamarlo setType, no filterByTypes, además solo envias un valor.
             onChange={(e) => dispatch(filterByTypes(e.target.value))}
           />
 
@@ -55,7 +60,7 @@ function SubHeader({ ...props }) {
             label="Ciudad"
             defaultText="Madrid, Barcelona o Zaragoza..."
             hideLabel
-            options={allCities.map((city) => ({value: city, text: city}))}
+            options={allCities.map((city) => ({ value: city, text: city }))}
             onChange={(e) => dispatch(filterByCities(e.target.value))}
           />
 
@@ -69,5 +74,3 @@ function SubHeader({ ...props }) {
 }
 
 export default styled(SubHeader)``
-
-

@@ -17,7 +17,7 @@ const filterCity = (house, city) => {
 }
 
 const fiterCasas = (house, city, type) =>
-    filterType(house, type) && filterCity(house, city)
+  filterType(house, type) && filterCity(house, city)
 
 function Houses() {
   const houses = useSelector((state) => state.houses.houses)
@@ -30,6 +30,8 @@ function Houses() {
   useEffect(() => {
     dispatch(getHouses())
   }, [dispatch])
+
+  //   Elimina el bloque de comentarios
 
   /* useEffect(() => {
     const actualState = () => {
@@ -84,7 +86,8 @@ function Houses() {
         {isLoading && <div>Loading...</div>}
         {isError && <div>Error</div>}
         {isSucces &&
-          allIds.filter(id => fiterCasas(byId[id], byCities, byType))
+          allIds
+            .filter((id) => fiterCasas(byId[id], byCities, byType))
             .slice(0, perPage)
             .map((id) => (
               <HouseCard
