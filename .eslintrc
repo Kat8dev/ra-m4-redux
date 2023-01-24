@@ -8,6 +8,12 @@
     "react/prop-types": "warn",
     "react/require-default-props": "off",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "no-restricted-syntax": ["BinaryExpression[operator='in']"],
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["state"] }
+    ]
+    
   }
 }
